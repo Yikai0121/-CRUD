@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<IdentityUser>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">用戶名稱</th>
+            <th scope="col">Email</th>
+            <th scope="col">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <th scope="row">@u.Id</th>
+                <td>@u.UserName</td>
+                <td>@u.Email</td>
+                <td>
+                    <form asp-action="DeleteUser" asp-route-id="@u.Id" method="post">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('確認刪除')">刪除</button>
+                        <a asp-action="Edit" asp-route-id="@u.Id" class="btn btn-success">編輯</a>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="AddUser" class="btn btn-danger">添加用戶</a>
